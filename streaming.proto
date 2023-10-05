@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package streaming;
+
+service NumberStreamer {
+    rpc StreamNumbers (NumberRequest) returns (stream NumberResponse);
+}
+
+message NumberRequest {
+    int32 start = 1;
+    int32 end = 2;
+}
+
+message NumberResponse {
+    int32 number = 1;
+}
+
+
+// npx grpc_tools_node_protoc --js_out=import_style=commonjs, binary:. --grpxc_put=. --plugin=protoc-gen-grpc=`which grpc_tools_node_proto_plugin` streaming.proto
+// this creates stream_grpc_pb.js & streaming_pb.js
+
